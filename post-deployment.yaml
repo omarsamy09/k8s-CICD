@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: posts-deployment
+  labels:
+    app: posts
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: posts
+  template:
+    metadata:
+      labels:
+        app: posts
+    spec:
+      containers:
+      - name: posts
+        image: second-image:03
+        env:
+        - name: PostsServiceUrl
+          value: "http://localhost:3000"
+        - name: VotesServiceUrl
+          value: "http://localhost:3001"
+        - name: PORT
+          value: "3000" 
+        ports:
+        - containerPort: 3000

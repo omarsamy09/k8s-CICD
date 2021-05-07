@@ -1,0 +1,19 @@
+version: '3'
+services:
+    posts: 
+        image: second-image:03
+        network_mode: host   
+        command: node index.js
+        environment:
+            PostsServiceURL: 'http://localhost:3000'
+            VotesServiceURL: 'http://localhost:3001'
+            PORT: 3000
+    votes: 
+        image: second-image:03
+        network_mode: host    
+        command: node index.js
+        environment:
+           VotesServiceURL: 'http://localhost:3001'
+           PostsServiceURL: 'http://localhost:3000'
+           PORT: 3001
+            

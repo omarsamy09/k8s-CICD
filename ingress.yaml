@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress
+  namespace: default
+spec:
+  rules:
+   - host: "posts.me"
+     http:
+       paths:
+        - path: /health
+          pathType: Prefix
+          backend:
+           service:
+              name: post-service
+              port:
+                number: 81
+    
+   - host: "votes.me"
+     http:
+       paths:
+        - path: /health
+          pathType: Prefix
+          backend:
+           service:
+              name: votes-service
+              port:
+                number: 80

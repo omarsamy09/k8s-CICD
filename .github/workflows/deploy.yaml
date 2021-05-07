@@ -1,0 +1,23 @@
+
+name: echo
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: azure/setup-kubectl@v1
+
+      - name: Kubectl configuration
+        shell: bash
+        run: |
+          mkdir -p ~/.kube
+          echo "${{ secrets.KUBE_CONFIG_TEMP }}" | base64 -d -i > ~/.kube/config
+      - name: deploy-dev
+        run: |
+          kubectl get pods
