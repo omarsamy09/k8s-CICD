@@ -2,6 +2,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: first-pod
+  namespace: omar
   labels:
     app: posts
 spec:
@@ -24,6 +25,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: second-pod
+  namespace: omar
   labels: 
     app: votes
 spec:
