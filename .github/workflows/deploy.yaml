@@ -38,7 +38,6 @@ jobs:
           IMAGE: omarsamy09/second-image:03
           POST_SERVICE_PORT: 3000
           VOTE_SERVICE_PORT: 3001
-          REPLICAS: 2
         run: |
           echo $M3_VERSION
           mkdir -p $TEMP_DIR
