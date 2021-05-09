@@ -2,7 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: ingress
-  namespace: omar
+  namespace: "{{{M3_NAMESPACE}}}"
 spec:
   rules:
    - host: "{{{POST_SERVICE_DNS}}}.{{{M3_HOST_NAME}}}"

@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: posts-deployment
-  namespace: omar
+  namespace: "{{{"{{{M3_NAMESPACE}}}"M3_NAMESPACE}}}"
   labels:
     app: posts
 spec:
