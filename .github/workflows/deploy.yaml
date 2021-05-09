@@ -1,16 +1,16 @@
-
 name: echo
 
 on:
   push:
     branches:
       - main
-
+      
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
+    
     steps:
+      - uses: actions/checkout@v2
       - uses: azure/setup-kubectl@v1
 
       - name: Kubectl configuration
@@ -18,6 +18,29 @@ jobs:
         run: |
           mkdir -p ~/.kube
           echo "${{ secrets.KUBE_CONFIG_TEMP }}" | base64 -d -i > ~/.kube/config
-      - name: deploy-dev
+      - name: install moustache
         run: |
-          kubectl get pods
+          curl -sSL https://git.io/get-mo -o mo
+          chmod +x mo
+          sudo mv mo /usr/local/bin/
+          echo "works" | mo
+
+      # deploy dev
+      - name: deploy-temp
+        env:
+          M3_DEPLOYMENT_PATH: deploy
+          TEMP_DIR: temp
+          M3_NAMESPACE: omar
+          M3_HOST_NAME: pickify.net
+          M3_REPLICAS: '2'
+          POST_SERVICE_DNS: omar.posts
+          VOTE_SERVICE_DNS: omar.votes
+          IMAGE: omarsamy09/second-image:03
+          POST_SERVICE_PORT: 3000
+          VOTE_SERVICE_PORT: 3001
+          REPLICAS: 2
+        run: |
+          echo $M3_VERSION
+          mkdir -p $TEMP_DIR
+          for f in $M3_DEPLOYMENT_PATH/apply/*; do mo -u "$f" > $TEMP_DIR/"$(basename $f)"; done
+          kubectl apply -f $TEMP_DIR

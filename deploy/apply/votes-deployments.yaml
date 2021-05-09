@@ -17,13 +17,13 @@ spec:
     spec:
       containers:
       - name: votes
-        image: second-image:03
+        image: "{{{IMAGE}}}"
         env:
         - name: PostsServiceUrl
-          value: "http://localhost:3000"
+          value: "posts-service.{{{M3_NAMESPACE}}}"
         - name: VotesServiceUrl
-          value: "http://localhost:3001"
+          value: "votes-service.{{{M3_NAMESPACE}}}"
         - name: PORT
-          value: "3001" 
+          value: "{{{VOTE_SERVICE_PORT}}}"
         ports:
         - containerPort: 3001
