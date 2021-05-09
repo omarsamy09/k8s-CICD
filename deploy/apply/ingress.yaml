@@ -5,7 +5,7 @@ metadata:
   namespace: omar
 spec:
   rules:
-   - host: "{{{POSTS_SERVICE_DNS}}}.{{{M3_HOST_NAME}}}"
+   - host: "{{{POST_SERVICE_DNS}}}.{{{M3_HOST_NAME}}}"
      http:
        paths:
         - path: /
@@ -16,7 +16,7 @@ spec:
               port:
                 number: 81
     
-   - host: "{{{VOTES_SERVICE_DNS}}}.{{{M3_HOST_NAME}}}"
+   - host: "{{{VOTE_SERVICE_DNS}}}.{{{M3_HOST_NAME}}}"
      http:
        paths:
         - path: /
